@@ -68,4 +68,19 @@ module.exports = {
       });
     }
   },
+
+  tail: function (file) {
+    file.forEach((fileName)=>{
+      fs.readFile(fileName,"utf8", (err, data) => {
+        if (err) {
+          process.stdout.write(err);
+        } else {
+          const lines = data.split("\n").slice(-5);
+          const firstThreeLines = lines.join("\n");
+          process.stdout.write(firstThreeLines);
+        }
+        process.stdout.write("\nprompt > ");
+      });
+    })
+  }
 };
